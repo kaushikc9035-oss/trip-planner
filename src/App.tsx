@@ -557,8 +557,20 @@ export default function App() {
                   <Card className="border-destructive/50 bg-destructive/5">
                     <CardContent className="p-8 text-center">
                       <p className="text-destructive font-medium mb-4">{error}</p>
-                      <div className="text-xs text-zinc-500 mb-6 space-y-1">
-                        <p>System Status: {process.env.GEMINI_API_KEY ? "âœ… API Key Detected" : "âŒ API Key Missing"}</p>
+                      <div className="text-xs text-zinc-500 mb-6 space-y-2 bg-zinc-900/50 p-4 rounded-lg border border-zinc-800">
+                        <p className="font-semibold text-zinc-400 uppercase tracking-wider">Debug Information</p>
+                        <p>Status: {process.env.GEMINI_API_KEY ? "âœ… Key Loaded" : "âŒ Key Missing"}</p>
+                        {process.env.GEMINI_API_KEY && (
+                          <p>Key Mask: {process.env.GEMINI_API_KEY.substring(0, 4)}...{process.env.GEMINI_API_KEY.substring(process.env.GEMINI_API_KEY.length - 4)}</p>
+                        )}
+                        <div className="mt-2 pt-2 border-t border-zinc-800 text-left">
+                          <p className="text-zinc-400 mb-1">Troubleshooting 403 Error:</p>
+                          <ul className="list-disc list-inside space-y-1">
+                            <li>Create a <b>NEW</b> key in a <b>NEW</b> project in AI Studio.</li>
+                            <li>Ensure "Generative AI API" is enabled in Cloud Console.</li>
+                            <li>Check for "Website Restrictions" on the key.</li>
+                          </ul>
+                        </div>
                       </div>
                       <Button variant="outline" onClick={() => setError(null)}>Try Again</Button>
                     </CardContent>
