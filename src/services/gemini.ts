@@ -140,7 +140,7 @@ Category:
     }
 
     const timestamp = new Date().toLocaleTimeString();
-    throw new Error(`AI Error (${timestamp}): ${errorMessage}`);
+    throw new Error(`AI Error (${timestamp}) [Model: gemini-3-flash-preview]: ${errorMessage}`);
   }
 }
 
@@ -177,6 +177,6 @@ Explain briefly what changes were made and why.`;
   } catch (error: any) {
     console.error("Detailed Adaptation Error:", error);
     const errorMessage = error?.message || "Failed to adapt itinerary.";
-    throw new Error(`Adaptation Error: ${errorMessage}`);
+    throw new Error(`Adaptation Error [Model: gemini-3-flash-preview]: ${errorMessage}`);
   }
 }

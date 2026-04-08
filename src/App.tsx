@@ -560,6 +560,7 @@ export default function App() {
                       <div className="text-xs text-zinc-500 mb-6 space-y-2 bg-zinc-900/50 p-4 rounded-lg border border-zinc-800">
                         <p className="font-semibold text-zinc-400 uppercase tracking-wider">Debug Information</p>
                         <p>Status: {process.env.GEMINI_API_KEY ? "âœ… Key Loaded" : "âŒ Key Missing"}</p>
+                        <p>Model: gemini-3-flash-preview</p>
                         {process.env.GEMINI_API_KEY && (
                           <p>Key Mask: {process.env.GEMINI_API_KEY.substring(0, 4)}...{process.env.GEMINI_API_KEY.substring(process.env.GEMINI_API_KEY.length - 4)}</p>
                         )}
