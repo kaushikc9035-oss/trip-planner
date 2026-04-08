@@ -560,15 +560,24 @@ export default function App() {
                       <div className="text-xs text-zinc-500 mb-6 space-y-2 bg-zinc-900/50 p-4 rounded-lg border border-zinc-800">
                         <p className="font-semibold text-zinc-400 uppercase tracking-wider">Debug Information</p>
                         <p>Status: {process.env.GEMINI_API_KEY ? "âœ… Key Loaded" : "âŒ Key Missing"}</p>
-                        <p>Model: gemini-3-flash-preview</p>
+                        <p>Model: gemini-flash-latest</p>
                         {process.env.GEMINI_API_KEY && (
                           <p>Key Mask: {process.env.GEMINI_API_KEY.substring(0, 4)}...{process.env.GEMINI_API_KEY.substring(process.env.GEMINI_API_KEY.length - 4)}</p>
                         )}
                         <div className="mt-2 pt-2 border-t border-zinc-800 text-left">
                           <p className="text-zinc-400 mb-1">Troubleshooting 403 Error:</p>
                           <ul className="list-disc list-inside space-y-1">
+                            <li>
+                              <a 
+                                href="https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-blue-400 hover:underline"
+                              >
+                                Click here to Enable the API
+                              </a>
+                            </li>
                             <li>Create a <b>NEW</b> key in a <b>NEW</b> project in AI Studio.</li>
-                            <li>Ensure "Generative AI API" is enabled in Cloud Console.</li>
                             <li>Check for "Website Restrictions" on the key.</li>
                           </ul>
                         </div>

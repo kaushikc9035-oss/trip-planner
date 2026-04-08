@@ -117,7 +117,7 @@ Category:
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-flash-latest",
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: {
         temperature: 0.7,
@@ -134,13 +134,13 @@ Category:
     if (error?.status) errorMessage = `[${error.status}] ${errorMessage}`;
     
     if (errorMessage.includes("403") || errorMessage.includes("PERMISSION_DENIED")) {
-      errorMessage = "Permission Denied (403). Please ensure 'Generative AI API' is enabled in Google Cloud and your API key has NO website restrictions.";
+      errorMessage = "Permission Denied (403). Your Google Cloud project is blocking access.";
     } else if (errorMessage.includes("API_KEY_INVALID") || !apiKey) {
       errorMessage = "Invalid or missing API Key. Please check your environment variables.";
     }
 
     const timestamp = new Date().toLocaleTimeString();
-    throw new Error(`AI Error (${timestamp}) [Model: gemini-3-flash-preview]: ${errorMessage}`);
+    throw new Error(`AI Error (${timestamp}) [Model: gemini-flash-latest]: ${errorMessage}`);
   }
 }
 
@@ -166,7 +166,7 @@ Explain briefly what changes were made and why.`;
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-flash-latest",
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: {
         temperature: 0.7,
@@ -177,6 +177,6 @@ Explain briefly what changes were made and why.`;
   } catch (error: any) {
     console.error("Detailed Adaptation Error:", error);
     const errorMessage = error?.message || "Failed to adapt itinerary.";
-    throw new Error(`Adaptation Error [Model: gemini-3-flash-preview]: ${errorMessage}`);
+    throw new Error(`Adaptation Error [Model: gemini-flash-latest]: ${errorMessage}`);
   }
 }
