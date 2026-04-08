@@ -1,0 +1,5 @@
+{
+  "name": "Voyager: AI Travel Itinerary Generator",
+  "description": "Create detailed, personalized day-wise travel itineraries for any destination, budget, and interest using Gemini AI.",
+  "requestFramePermissions": []
+}
