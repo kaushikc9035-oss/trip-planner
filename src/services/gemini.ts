@@ -117,7 +117,7 @@ Category:
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-1.5-flash-latest",
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: {
         temperature: 0.7,
@@ -133,7 +133,9 @@ Category:
     if (error?.message) errorMessage = error.message;
     if (error?.status) errorMessage = `[${error.status}] ${errorMessage}`;
     
-    if (errorMessage.includes("API_KEY_INVALID") || !apiKey) {
+    if (errorMessage.includes("403") || errorMessage.includes("PERMISSION_DENIED")) {
+      errorMessage = "Permission Denied (403). Please ensure 'Generative AI API' is enabled in Google Cloud and your API key has NO website restrictions.";
+    } else if (errorMessage.includes("API_KEY_INVALID") || !apiKey) {
       errorMessage = "Invalid or missing API Key. Please check your environment variables.";
     }
 
@@ -164,7 +166,7 @@ Explain briefly what changes were made and why.`;
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-1.5-flash-latest",
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: {
         temperature: 0.7,
