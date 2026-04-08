@@ -1,6 +1,11 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
+const apiKey = process.env.GEMINI_API_KEY;
+if (!apiKey) {
+  console.warn("GEMINI_API_KEY is missing. AI features will not work until it is set in environment variables.");
+}
+
+const ai = new GoogleGenAI({ apiKey: apiKey || "" });
 
 export interface ItineraryRequest {
   destination: string;
