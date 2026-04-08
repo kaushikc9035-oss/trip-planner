@@ -118,16 +118,27 @@ Category:
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: prompt,
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: {
         temperature: 0.7,
       },
     });
 
     return response.text;
-  } catch (error) {
-    console.error("Error generating itinerary:", error);
-    throw new Error("Failed to generate itinerary. Please check your API key and try again.");
+  } catch (error: any) {
+    console.error("Detailed Gemini Error:", error);
+    
+    // Extract a more helpful error message
+    let errorMessage = "An unknown error occurred with the AI service.";
+    if (error?.message) errorMessage = error.message;
+    if (error?.status) errorMessage = `[${error.status}] ${errorMessage}`;
+    
+    if (errorMessage.includes("API_KEY_INVALID") || !apiKey) {
+      errorMessage = "Invalid or missing API Key. Please check your environment variables.";
+    }
+
+    const timestamp = new Date().toLocaleTimeString();
+    throw new Error(`AI Error (${timestamp}): ${errorMessage}`);
   }
 }
 
@@ -154,15 +165,16 @@ Explain briefly what changes were made and why.`;
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: prompt,
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: {
         temperature: 0.7,
       },
     });
 
     return response.text;
-  } catch (error) {
-    console.error("Error adapting itinerary:", error);
-    throw new Error("Failed to adapt itinerary.");
+  } catch (error: any) {
+    console.error("Detailed Adaptation Error:", error);
+    const errorMessage = error?.message || "Failed to adapt itinerary.";
+    throw new Error(`Adaptation Error: ${errorMessage}`);
   }
 }

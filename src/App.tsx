@@ -557,6 +557,9 @@ export default function App() {
                   <Card className="border-destructive/50 bg-destructive/5">
                     <CardContent className="p-8 text-center">
                       <p className="text-destructive font-medium mb-4">{error}</p>
+                      <div className="text-xs text-zinc-500 mb-6 space-y-1">
+                        <p>System Status: {process.env.GEMINI_API_KEY ? "âœ… API Key Detected" : "âŒ API Key Missing"}</p>
+                      </div>
                       <Button variant="outline" onClick={() => setError(null)}>Try Again</Button>
                     </CardContent>
                   </Card>
